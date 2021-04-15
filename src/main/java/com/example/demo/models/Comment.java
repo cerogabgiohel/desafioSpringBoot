@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="Tb_Comment")
@@ -24,6 +25,7 @@ public class Comment implements Serializable{
 	private long idComment;
 	
 	@Column(name = "comment")
+	@NotBlank
 	private String text;
 	
 	@ManyToOne

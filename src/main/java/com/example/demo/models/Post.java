@@ -12,7 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
+import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name="Tb_Post")
@@ -27,6 +29,7 @@ public class Post implements Serializable{
 	private long id;
 	
 	@Column(name="post")
+	@NotBlank
 	private String text;
 	
 	

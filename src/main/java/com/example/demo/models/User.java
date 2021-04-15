@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Tb_User")
@@ -26,9 +27,11 @@ public class User implements Serializable {
 	private long id;
 	
 	@Column(name="name")
+	@NotBlank
 	private String name;
 	
 	@Column(name="password")
+	@NotBlank
 	private String password;
 	
 	@Column(name="posts")
