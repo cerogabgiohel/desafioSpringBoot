@@ -11,33 +11,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.repositories.PostRepository;
-import com.example.demo.models.Post;
+import com.example.demo.models.User;
+import com.example.demo.repositories.UserRepository;
 
 @RestController
-@RequestMapping(value="/post")
-public class PostController {
+@RequestMapping(value ="/user")
+public class UserController {
 
 	@Autowired
-	PostRepository postRepository;
+	UserRepository userRepository;
 	
-	@GetMapping("/posts")
-	public List<Post> listPosts(){
-		return postRepository.findAll();
+	@GetMapping("/users")
+	public List<User>listAll(){
+		return userRepository.findAll();
 	}
 	
-	@PostMapping("/posts")
-	public Post savePost(@RequestBody Post post) {
-		return postRepository.save(post);
+	@PostMapping("/users")
+	public User saveUser(@RequestBody User user) {
+		return userRepository.save(user);
 	}
 	
-	@PutMapping("/posts")
-	public Post updatePost(@RequestBody Post post) {
-		return postRepository.save(post);
+	@PutMapping("/users")
+	public User updateUser(@RequestBody User user) {
+		return userRepository.save(user);
 	}
 	
-	@DeleteMapping("/posts")
-	public void deletePost(@RequestBody Post post) {
-		postRepository.delete(post);		
+	@DeleteMapping("/users")
+	public void deleteUser(@RequestBody User user) {
+		userRepository.delete(user);
 	}
 }
