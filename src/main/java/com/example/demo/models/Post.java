@@ -24,21 +24,19 @@ public class Post implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="idPost")
-	@SequenceGenerator(name="idPost",initialValue = 1, allocationSize = 1, sequenceName = "IdPostSeq")
-	@Column(name="Id")
+	@SequenceGenerator(name="idPost",initialValue = 1, allocationSize = 1, sequenceName = "IdPostSeq")	
 	private long id;
 	
 	@Column(name="post")
 	@NotBlank
-	private String text;
-	
+	private String text;	
 	
 	@OneToMany(targetEntity = Comment.class)
 	@Column(name="comment")
 	private List comments;
 	
 	@ManyToOne
-	private User user;
+	private User user;	
 
 	public long getId() {
 		return id;
@@ -70,8 +68,6 @@ public class Post implements Serializable{
 
 	public void setUser(User user) {
 		this.user = user;
-	}	
-	
-	
+	}		
 	
 }

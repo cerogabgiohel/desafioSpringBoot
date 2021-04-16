@@ -33,7 +33,7 @@ public class Comment implements Serializable{
 	
 	@ManyToOne
 	private User user;
-	
+
 	public long getIdComment() {
 		return idComment;
 	}

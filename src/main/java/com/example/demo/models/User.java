@@ -22,15 +22,12 @@ public class User implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="idUser")
-	@SequenceGenerator(name="idUser",initialValue = 1, allocationSize = 1, sequenceName = "IdUserSeq")
-	@Column(name="Id")
+	@SequenceGenerator(name="idUser",initialValue = 1, allocationSize = 1, sequenceName = "IdUserSeq")	
 	private long id;
 	
-	@Column(name="name")
 	@NotBlank
-	private String name;
+	private String name;	
 	
-	@Column(name="password")
 	@NotBlank
 	private String password;
 	
@@ -40,7 +37,7 @@ public class User implements Serializable {
 	
 	@Column(name="comments")
 	@OneToMany(targetEntity = Comment.class)
-	private List comment;
+	private List comment;	
 
 	public long getId() {
 		return id;
