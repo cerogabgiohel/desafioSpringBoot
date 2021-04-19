@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -31,11 +32,12 @@ public class Post implements Serializable{
 	@NotBlank
 	private String text;	
 	
-	@OneToMany(targetEntity = Comment.class)
+	@OneToMany(targetEntity = Comment.class)	
 	@Column(name="comment")
-	private List comments;
+	private List<Comment> comments;
 	
 	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;	
 
 	public long getId() {

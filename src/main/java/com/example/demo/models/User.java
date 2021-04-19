@@ -33,11 +33,11 @@ public class User implements Serializable {
 	
 	@Column(name="posts")
 	@OneToMany(targetEntity = Post.class)
-	private List post;
+	private List<Post> post;
 	
 	@Column(name="comments")
 	@OneToMany(targetEntity = Comment.class)
-	private List comment;	
+	private List<Comment> comment;	
 
 	public long getId() {
 		return id;
