@@ -38,6 +38,6 @@ public class PostController {
 	
 	@DeleteMapping("/posts")
 	public void deletePost(@RequestBody Post post) {
-		postRepository.delete(post);		
+		postRepository.deleteById(post.getId());		
 	}
 }

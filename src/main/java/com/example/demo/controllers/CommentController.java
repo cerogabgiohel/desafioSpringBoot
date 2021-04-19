@@ -38,6 +38,6 @@ public class CommentController {
 	
 	@DeleteMapping("/comments")
 	public void deleComments(@RequestBody Comment comment) {
-		commentRepository.delete(comment);
+		commentRepository.deleteById(comment.getIdComment());
 	}
 }

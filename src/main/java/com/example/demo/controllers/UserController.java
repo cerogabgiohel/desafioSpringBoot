@@ -38,6 +38,6 @@ public class UserController {
 	
 	@DeleteMapping("/users")
 	public void deleteUser(@RequestBody User user) {
-		userRepository.delete(user);
+		userRepository.deleteById(user.getId());
 	}
 }
