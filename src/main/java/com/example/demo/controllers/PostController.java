@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.repositories.PostRepository;
+import com.example.demo.services.PostService;
 import com.example.demo.models.Post;
 
 @RestController
@@ -19,25 +21,30 @@ import com.example.demo.models.Post;
 public class PostController {
 
 	@Autowired
-	PostRepository postRepository;
+	PostService postService;
 	
 	@GetMapping("/posts")
 	public List<Post> listPosts(){
-		return postRepository.findAll();
+		return postService.listPosts();
+	}
+	
+	@GetMapping("/posts/{id}")
+	public Optional<Post> findPost(Post post) {
+		return postService.findPost(post);
 	}
 	
 	@PostMapping("/posts")
-	public Post savePost(@RequestBody Post post) {
-		return postRepository.save(post);
+	public void savePost(@RequestBody Post post) {
+		postService.savePost(post);
 	}
 	
 	@PutMapping("/posts")
-	public Post updatePost(@RequestBody Post post) {
-		return postRepository.save(post);
+	public void updatePost(@RequestBody Post post) {
+		postService.updatePost(post);
 	}
 	
 	@DeleteMapping("/posts")
 	public void deletePost(@RequestBody Post post) {
-		postRepository.deleteById(post.getId());		
+		postService.deletePost(post);		
 	}
 }
