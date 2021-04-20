@@ -15,7 +15,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name="Tb_Post")
