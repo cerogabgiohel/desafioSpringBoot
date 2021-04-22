@@ -42,10 +42,10 @@ public class CommentController {
 	@PutMapping("/comments")
 	public void updateComments(@RequestBody Comment comment) {
 		commentService.updateComment(comment);
-	}
+	}	
 	
 	@DeleteMapping("/comments")
-	public void deleComments(@RequestBody Comment comment) {
+	public void deleteComments(@RequestBody Comment comment) {
 		commentService.deleteComment(comment);
 	}
 }

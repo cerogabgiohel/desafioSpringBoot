@@ -13,6 +13,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "Tb_User")
 public class User implements Serializable {
@@ -30,20 +32,16 @@ public class User implements Serializable {
 	@NotBlank
 	private String password;
 	
-	@Column(name="posts")
-	@OneToMany(targetEntity = Post.class)
-	private List<Post> post;
-	
-	@Column(name="comments")
-	@OneToMany(targetEntity = Comment.class)
+	@OneToMany(targetEntity = Post.class, mappedBy = "user" )
+	private List<Post> post;	
+
+	@OneToMany(targetEntity = Comment.class, mappedBy = "user")
 	private List<Comment> comment;	
 	
-	@Column(name = "albums")
-	@OneToMany(targetEntity = Album.class)
+	@OneToMany(targetEntity = Album.class, mappedBy = "user")
 	private List<Album> album;
 	
-	@Column(name = "images")
-	@OneToMany(targetEntity = Image.class)
+	@OneToMany(targetEntity = Image.class, mappedBy = "user")
 	private List<Image> image;
 
 	public long getId() {

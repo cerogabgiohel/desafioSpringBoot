@@ -13,7 +13,7 @@ import com.example.demo.models.Album;
 public class AlbumService {
 
 	@Autowired
-	private AlbumRepository albumRepository;
+	AlbumRepository albumRepository;
 	
 	public List<Album>listImages(){
 		return albumRepository.findAll();

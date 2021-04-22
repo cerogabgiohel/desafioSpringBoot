@@ -13,7 +13,7 @@ import com.example.demo.models.Comment;
 public class CommentService {
 	
 	@Autowired
-	private CommentRepository commentRepository;
+	CommentRepository commentRepository;
 	
 	public List<Comment>listComments(){
 		return commentRepository.findAll();
@@ -40,6 +40,7 @@ public class CommentService {
 		if(commentRepository.existsById(comment.getIdComment())){
 			commentRepository.deleteById(comment.getIdComment());
 		}
-	}
 
+	}
+	
 }

@@ -3,6 +3,7 @@ package com.example.demo.models;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Tb_image")
@@ -34,7 +38,7 @@ public class Image implements Serializable {
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "album_id")	
+	@JoinColumn(name = "album_id", referencedColumnName = "id")	
 	private Album album;
 
 	public Long getId() {
@@ -52,7 +56,8 @@ public class Image implements Serializable {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-
+	
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
@@ -60,7 +65,8 @@ public class Image implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	
+	@JsonIgnore
 	public Album getAlbum() {
 		return album;
 	}

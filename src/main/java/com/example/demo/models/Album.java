@@ -1,11 +1,15 @@
 package com.example.demo.models;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +18,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table(name = "Tb_album")
@@ -26,30 +35,30 @@ public class Album implements Serializable {
 	@SequenceGenerator(name="idAlbum",initialValue = 1, allocationSize = 1, sequenceName = "IdAlbumSeq")
 	private Long id;	
 	
-	@OneToMany(targetEntity = Image.class)
-	@Column(name = "images")
+	@OneToMany(targetEntity = Image.class, mappedBy = "album") 
 	private List<Image>image;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")	
+	@JoinColumn(name = "user_id")
 	private User user;
-
+	
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
+	}		
 
-	public List getImage() {
+	public List<Image> getImage() {
 		return image;
 	}
 
-	public void setImage(List image) {
+	public void setImage(List<Image> image) {
 		this.image = image;
 	}
 
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}

@@ -13,6 +13,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="Tb_Comment")
 public class Comment implements Serializable{
@@ -25,16 +28,15 @@ public class Comment implements Serializable{
 	@Column(name = "id")
 	private long idComment;
 	
-	@Column(name = "comment")
 	@NotBlank
 	private String text;
 	
 	@ManyToOne
-	@JoinColumn(name = "post_id")
+	@JoinColumn(name = "post_id")	
 	private Post post;	
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id")	
 	private User user;
 
 	public long getIdComment() {
@@ -53,6 +55,7 @@ public class Comment implements Serializable{
 		this.text = text;
 	}
 
+	@JsonIgnore
 	public Post getPost() {
 		return post;
 	}
@@ -61,6 +64,7 @@ public class Comment implements Serializable{
 		this.post = post;
 	}
 
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
