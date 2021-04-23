@@ -35,7 +35,7 @@ public class UserService {
 	}
 	
 	public User updateUser(User user) {
-		if(userRepository.existsById(user.getId())) {			
+		if(userRepository.existsById(user.getId())) {				
 			return userRepository.save(user);		
 		}
 		return null;
