@@ -37,22 +37,18 @@ public class User implements Serializable {
 	
 	@OneToMany(targetEntity = Post.class, mappedBy = "user", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL) 
-	@JsonBackReference
 	private List<Post> post;	
 
 	@OneToMany(targetEntity = Comment.class, mappedBy = "user", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-	@JsonBackReference
 	private List<Comment> comment;	
 	
 	@OneToMany(targetEntity = Album.class, mappedBy = "user", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
-	@JsonBackReference
 	private List<Album> album;
 	
 	@OneToMany(targetEntity = Image.class, mappedBy = "user", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-	@JsonBackReference
+            cascade = CascadeType.ALL)	
 	private List<Image> image;
 
 	public long getId() {
