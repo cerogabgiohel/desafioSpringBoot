@@ -3,8 +3,10 @@ package com.example.demo.models;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,16 +34,20 @@ public class User implements Serializable {
 	@NotBlank
 	private String password;
 	
-	@OneToMany(targetEntity = Post.class, mappedBy = "user" )
+	@OneToMany(targetEntity = Post.class, mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL) 
 	private List<Post> post;	
 
-	@OneToMany(targetEntity = Comment.class, mappedBy = "user")
+	@OneToMany(targetEntity = Comment.class, mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
 	private List<Comment> comment;	
 	
-	@OneToMany(targetEntity = Album.class, mappedBy = "user")
+	@OneToMany(targetEntity = Album.class, mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
 	private List<Album> album;
 	
-	@OneToMany(targetEntity = Image.class, mappedBy = "user")
+	@OneToMany(targetEntity = Image.class, mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
 	private List<Image> image;
 
 	public long getId() {
@@ -68,19 +74,20 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public List getPost() {
+
+	public List<Post> getPost() {
 		return post;
 	}
 
-	public void setPost(List post) {
+	public void setPost(List<Post> post) {
 		this.post = post;
 	}
 
-	public List getComment() {
+	public List<Comment> getComment() {
 		return comment;
 	}
 
-	public void setComment(List comment) {
+	public void setComment(List<Comment> comment) {
 		this.comment = comment;
 	}
 

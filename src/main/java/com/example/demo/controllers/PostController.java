@@ -34,13 +34,13 @@ public class PostController {
 	}
 	
 	@PostMapping("/posts")
-	public void savePost(@RequestBody Post post) {
-		postService.savePost(post);
+	public Post savePost(@RequestBody Post post) {
+		return postService.savePost(post);
 	}
 	
 	@PutMapping("/posts")
-	public void updatePost(@RequestBody Post post) {
-		postService.updatePost(post);
+	public Post updatePost(@RequestBody Post post) {
+		return postService.updatePost(post);
 	}
 	
 	@DeleteMapping("/posts")

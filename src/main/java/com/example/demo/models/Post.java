@@ -3,8 +3,10 @@ package com.example.demo.models;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,11 +37,11 @@ public class Post implements Serializable{
 	@NotBlank
 	private String text;	
 	
-	@OneToMany(targetEntity = Comment.class, mappedBy = "post")	
-	@Column(name="comment")
+	@OneToMany(targetEntity = Comment.class, mappedBy = "post", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
 	private List<Comment> comments;
 	
-	@ManyToOne
+	@ManyToOne(fetch= FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;	
 
@@ -58,15 +60,15 @@ public class Post implements Serializable{
 	public void setText(String text) {
 		this.text = text;
 	}
-
-	public List getComments() {
+	
+	public List<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(List comments) {
+	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
-	
+
 	@JsonIgnore
 	public User getUser() {
 		return user;

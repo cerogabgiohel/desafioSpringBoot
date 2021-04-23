@@ -24,26 +24,26 @@ public class AlbumController {
 	
 	@GetMapping("/albums")
 	public List<Album>listaAlbums(){
-		return albumService.listImages();		
+		return albumService.listAlbum();		
 	}
 	
 	@GetMapping("/albums/{id}")
 	public Optional<Album> findAlbum(Album album) {
-		return albumService.findImage(album);
+		return albumService.findAlbum(album);
 	}
 	
 	@PostMapping("/albums")
-	public void saveComments(@RequestBody Album album) {
-		albumService.saveImage(album);
+	public Album saveAlbum(@RequestBody Album album) {
+		return albumService.saveAlbum(album);
 	}
 	
 	@PutMapping("/albums")
-	public void updateComments(@RequestBody Album album) {
-		albumService.updateImage(album);
+	public Album updateAlbum(@RequestBody Album album) {
+		return albumService.updateAlbum(album);
 	}
 	
 	@DeleteMapping("/albums")
 	public void deleComments(@RequestBody Album album) {
-		albumService.deleteImage(album);
+		albumService.deleteAlbum(album);
 	}
 }

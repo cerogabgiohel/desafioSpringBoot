@@ -35,7 +35,8 @@ public class Album implements Serializable {
 	@SequenceGenerator(name="idAlbum",initialValue = 1, allocationSize = 1, sequenceName = "IdAlbumSeq")
 	private Long id;	
 	
-	@OneToMany(targetEntity = Image.class, mappedBy = "album") 
+	@OneToMany(targetEntity = Image.class, mappedBy = "album", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL) 
 	private List<Image>image;
 	
 	@ManyToOne

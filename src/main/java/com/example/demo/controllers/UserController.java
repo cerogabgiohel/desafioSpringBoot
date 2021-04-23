@@ -36,14 +36,34 @@ public class UserController {
 	}
 	
 	@PostMapping("/users")
-	public void saveUser(@RequestBody User user) {
-		userService.saveUser(user);
+	public User saveUser(@RequestBody User user) {
+		return userService.saveUser(user);
 	}
 	
 	@PutMapping("/users")
-	public void updateUser(@RequestBody User user) {
-		userService.updateUser(user);
+	public User updateUser(@RequestBody User user) {
+		return userService.updateUser(user);
 	}
+	
+	@PutMapping("/users/post")
+	public User updateUserPost(@RequestBody User user) {
+		return userService.updateUserPost(user);
+	}
+	
+	@PutMapping("/users/comment")
+	public User updateUserComment(@RequestBody User user) {
+		return userService.updateUserComment(user);
+	}
+
+	@PutMapping("/users/image")
+	public User updateUserImage(@RequestBody User user) {
+		return userService.updateUserImage(user);
+	}	
+	
+	@PutMapping("/users/album")
+	public User updateUserAlbum(@RequestBody User user) {
+		return userService.updateUserAlbum(user);
+	}	
 	
 	@DeleteMapping("/users")
 	public void deleteUser(@RequestBody User user) {

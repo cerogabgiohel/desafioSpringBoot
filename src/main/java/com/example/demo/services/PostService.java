@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.models.Comment;
 import com.example.demo.models.Post;
 import com.example.demo.repositories.PostRepository;
 
@@ -26,14 +27,22 @@ public class PostService {
 		return null;
 	}
 	
-	public void savePost(Post post) {
-		postRepository.save(post);
+	public Post savePost(Post post) {
+		for(Comment comment:post.getComments()) {
+			comment.setPost(post);			
+		}
+		return postRepository.save(post);
 	}
 	
-	public void updatePost(Post post) {
-		if(postRepository.existsById(post.getId())) {
-			postRepository.save(post);
+	public Post updatePost(Post post) {
+		if(postRepository.existsById(post.getId())) {			
+			for(Comment comment:post.getComments()) {
+				comment.setPost(post);
+				return postRepository.save(post);
+			}
 		}
+		return null;
+		
 	}
 	
 	public void deletePost(Post post) {
