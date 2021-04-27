@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.models.Comment;
 import com.example.demo.models.Image;
 import com.example.demo.services.ImageService;
 
@@ -25,6 +26,11 @@ public class ImageController {
 	@GetMapping("/images")
 	public List<Image> listImages(){
 		return imageService.listImages();
+	}
+	
+	@GetMapping("/sql/id")
+	public List<Image>sqlId(@RequestBody Image image){
+		return imageService.sqlId(image);
 	}
 	
 	@GetMapping("/images/{id}")

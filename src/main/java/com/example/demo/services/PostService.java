@@ -20,6 +20,11 @@ public class PostService {
 		return postRepository.findAll();
 	}
 	
+	public List<Post>sqlId(Post post){
+		return postRepository.sqlId(post.getId());
+	}
+	
+	
 	public Optional<Post> findPost(Post post) {
 		if(postRepository.existsById(post.getId())) {
 			return postRepository.findById(post.getId());

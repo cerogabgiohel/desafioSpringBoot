@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.models.Album;
+import com.example.demo.models.Comment;
 import com.example.demo.services.AlbumService;
 
 @RestController
@@ -25,6 +26,11 @@ public class AlbumController {
 	@GetMapping("/albums")
 	public List<Album>listaAlbums(){
 		return albumService.listAlbum();		
+	}
+	
+	@GetMapping("/sql/id")
+	public List<Album>sqlId(@RequestBody Album album){
+		return albumService.sqlId(album);
 	}
 	
 	@GetMapping("/albums/{id}")

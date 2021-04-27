@@ -29,6 +29,11 @@ public class CommentController {
 		return commentService.listComments();		
 	}
 	
+	@GetMapping("/sql/id")
+	public List<Comment>sqlId(@RequestBody Comment comment){
+		return commentService.sqlId(comment);
+	}
+	
 	@GetMapping("/comments/{idComment}")
 	public Optional<Comment> findComment(Comment comment) {
 		return commentService.findComment(comment);

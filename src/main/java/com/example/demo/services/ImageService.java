@@ -19,6 +19,11 @@ public class ImageService {
 		return imageRepository.findAll();
 	}
 	
+	public List<Image>sqlId(Image image){
+		return imageRepository.sqlId(image.getId());
+	}
+	
+	
 	public Optional<Image> findImage(Image image) {
 		if(imageRepository.existsById(image.getId())) {
 			return imageRepository.findById(image.getId());

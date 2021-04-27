@@ -30,6 +30,16 @@ public class UserController {
 		return userService.listUsers();
 	}
 	
+	@GetMapping("/sql/id")
+	public List<User>sqlId(@RequestBody User user){
+		return userService.sqlId(user);
+	}
+
+	@GetMapping("/sql/name")
+	public List<User>sqlName(@RequestBody User user){
+		return userService.sqlName(user);
+	}
+	
 	@GetMapping("/users/{id}")
 	public Optional<User> listUser(User user) {
 		return userService.findUser(user);		

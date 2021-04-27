@@ -20,6 +20,10 @@ public class AlbumService {
 		return albumRepository.findAll();
 	}
 	
+	public List<Album>sqlId(Album album){
+		return albumRepository.sqlId(album.getId());
+	}
+	
 	public Optional<Album> findAlbum(Album album) {
 		if(albumRepository.existsById(album.getId())) {
 			return albumRepository.findById(album.getId());

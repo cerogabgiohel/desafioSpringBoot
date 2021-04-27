@@ -23,6 +23,14 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
+	public List<User>sqlId(User user){
+		return userRepository.sqlId(user.getId());
+	}	
+	
+	public List<User>sqlName(User user){
+		return userRepository.sqlId(user.getName());
+	}	
+	
 	public Optional<User> findUser(User user) {
 		if(userRepository.existsById(user.getId())) {
 			return userRepository.findById(user.getId());

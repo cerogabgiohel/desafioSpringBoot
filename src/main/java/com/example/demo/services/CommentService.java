@@ -19,6 +19,11 @@ public class CommentService {
 		return commentRepository.findAll();
 	}
 	
+	public List<Comment>sqlId(Comment comment){
+		return commentRepository.sqlId(comment.getIdComment());
+	}
+	
+	
 	public Optional<Comment> findComment(Comment comment){
 		if(commentRepository.existsById(comment.getIdComment())) {
 			return commentRepository.findById(comment.getIdComment());
