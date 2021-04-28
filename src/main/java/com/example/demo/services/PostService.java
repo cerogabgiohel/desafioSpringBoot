@@ -24,6 +24,9 @@ public class PostService {
 		return postRepository.sqlId(post.getId());
 	}
 	
+	public List<Post>sqlPost(Post post){
+		return postRepository.sqlPost(post.getText());
+	}
 	
 	public Optional<Post> findPost(Post post) {
 		if(postRepository.existsById(post.getId())) {

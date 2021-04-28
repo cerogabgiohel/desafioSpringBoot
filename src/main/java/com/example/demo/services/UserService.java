@@ -31,8 +31,8 @@ public class UserService {
 		return userRepository.sqlName(user.getName());
 	}	
 	
-	public List<User>sqlNameContain(User user){
-		return userRepository.sqlNameContain(user.getName());
+	public List<User>sqlNameContains(User user){
+		return userRepository.sqlNameContains(user.getName());
 	}	
 	
 	public List<User>sqlStartsBy(User user){

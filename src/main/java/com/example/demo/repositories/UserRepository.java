@@ -10,18 +10,18 @@ import com.example.demo.models.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	
-	@Query("select u from User u where u.id = :id")
+	@Query("select u from User u where u.id = :id" )
 	public List<User>sqlId(@Param("id") Long id);
 	
-	@Query("select u from User u where u.name like :name")
+	@Query("select u from User u where lower(u.name) like lower(:name)")
 	public List<User>sqlName(@Param("name") String name);
 	
-	@Query("select u from User u where u.name like %:name%")
-	public List<User>sqlNameContain(@Param("name") String name);
+	@Query("select u from User u where lower(u.name) like lower(concat('%', :name, '%'))")
+	public List<User>sqlNameContains(@Param("name") String name);
 	
-	@Query("select u from User u where u.name like :name%")
+	@Query("select u from User u where lower(u.name) like lower(concat(:name, '%'))")
 	public List<User>sqlStartsBy(@Param("name") String name);
 	
-	@Query("select u from User u where u.name like %:name")
+	@Query("select u from User u where lower(u.name) like lower(concat('%', :name))")
 	public List<User>sqlEndsBy(@Param("name") String name);
 }

@@ -33,6 +33,11 @@ public class PostController {
 		return postService.sqlId(post);
 	}
 	
+	@GetMapping("/sql/contains")
+	public List<Post>sqlPost(@RequestBody Post post){
+		return postService.sqlPost(post);
+	}
+	
 	@GetMapping("/posts/{id}")
 	public Optional<Post> findPost(Post post) {
 		return postService.findPost(post);

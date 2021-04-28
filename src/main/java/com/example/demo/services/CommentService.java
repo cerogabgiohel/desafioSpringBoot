@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.repositories.CommentRepository;
 import com.example.demo.models.Comment;
+import com.example.demo.models.User;
 
 @Service
 public class CommentService {
@@ -21,8 +22,11 @@ public class CommentService {
 	
 	public List<Comment>sqlId(Comment comment){
 		return commentRepository.sqlId(comment.getIdComment());
-	}
+	}	
 	
+	public List<Comment>sqlContains(Comment comment){
+		return commentRepository.sqlComment(comment.getText());
+	}	
 	
 	public Optional<Comment> findComment(Comment comment){
 		if(commentRepository.existsById(comment.getIdComment())) {

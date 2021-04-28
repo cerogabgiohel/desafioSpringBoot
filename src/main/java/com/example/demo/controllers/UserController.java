@@ -40,9 +40,9 @@ public class UserController {
 		return userService.sqlName(user);
 	}
 	
-	@GetMapping("/sql/part")
-	public List<User>sqlPartOfName(@RequestBody User user){
-		return userService.sqlNameContain(user);
+	@GetMapping("/sql/contains")
+	public List<User>sqlNameContains(@RequestBody User user){
+		return userService.sqlNameContains(user);
 	}
 	
 	@GetMapping("/sql/starts")

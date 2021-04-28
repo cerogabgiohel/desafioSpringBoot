@@ -12,4 +12,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
 	@Query("select p from Post p where p.id = :id")
 	public List<Post>sqlId(@Param("id") Long id);
+	
+	@Query("select p from Post p where p.text like lower(concat('%', :text, '%'))")
+	public List<Post>sqlPost(@Param("text") String post);
 }
