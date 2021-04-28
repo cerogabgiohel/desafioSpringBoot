@@ -40,6 +40,21 @@ public class UserController {
 		return userService.sqlName(user);
 	}
 	
+	@GetMapping("/sql/part")
+	public List<User>sqlPartOfName(@RequestBody User user){
+		return userService.sqlNameContain(user);
+	}
+	
+	@GetMapping("/sql/starts")
+	public List<User>sqlStartsBy(@RequestBody User user){
+		return userService.sqlStartsBy(user);
+	}
+	
+	@GetMapping("/sql/ends")
+	public List<User>sqlEndsBy(@RequestBody User user){
+		return userService.sqlEndsBy(user);
+	}	
+	
 	@GetMapping("/users/{id}")
 	public Optional<User> listUser(User user) {
 		return userService.findUser(user);		

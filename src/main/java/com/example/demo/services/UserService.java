@@ -28,7 +28,19 @@ public class UserService {
 	}	
 	
 	public List<User>sqlName(User user){
-		return userRepository.sqlId(user.getName());
+		return userRepository.sqlName(user.getName());
+	}	
+	
+	public List<User>sqlNameContain(User user){
+		return userRepository.sqlNameContain(user.getName());
+	}	
+	
+	public List<User>sqlStartsBy(User user){
+		return userRepository.sqlStartsBy(user.getName());
+	}	
+	
+	public List<User>sqlEndsBy(User user){
+		return userRepository.sqlEndsBy(user.getName());
 	}	
 	
 	public Optional<User> findUser(User user) {

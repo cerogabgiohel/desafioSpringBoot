@@ -13,6 +13,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	@Query("select u from User u where u.id = :id")
 	public List<User>sqlId(@Param("id") Long id);
 	
-	@Query("select u from User u where u.name = :name")
-	public List<User>sqlId(@Param("name") String name);
+	@Query("select u from User u where u.name like :name")
+	public List<User>sqlName(@Param("name") String name);
+	
+	@Query("select u from User u where u.name like %:name%")
+	public List<User>sqlNameContain(@Param("name") String name);
+	
+	@Query("select u from User u where u.name like :name%")
+	public List<User>sqlStartsBy(@Param("name") String name);
+	
+	@Query("select u from User u where u.name like %:name")
+	public List<User>sqlEndsBy(@Param("name") String name);
 }
