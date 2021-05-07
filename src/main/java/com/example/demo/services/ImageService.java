@@ -25,10 +25,9 @@ public class ImageService {
 	
 	
 	public Optional<Image> findImage(Image image) {
-		if(imageRepository.existsById(image.getId())) {
-			return imageRepository.findById(image.getId());
-		}
-		return null;
+		
+		return imageRepository.findById(image.getId());
+		
 	}
 	
 	public void saveImages(Image image) {

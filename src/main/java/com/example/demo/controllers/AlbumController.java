@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.converter.AlbumConverter;
+import com.example.demo.dto.AlbumDto;
 import com.example.demo.models.Album;
-import com.example.demo.models.Comment;
 import com.example.demo.services.AlbumService;
 
 @RestController
@@ -23,33 +24,50 @@ public class AlbumController {
 	@Autowired
 	AlbumService albumService;
 	
+	@Autowired
+	AlbumConverter albumConverter;
+	
 	@GetMapping("/albums")
-	public List<Album>listaAlbums(){
-		return albumService.listAlbum();		
+	public List< AlbumDto>listAll(){
+		List<Album> findAll = albumService.listAlbum();
+		return albumConverter.entityToDto(findAll);
 	}
 	
 	@GetMapping("/sql/id")
-	public List<Album>sqlId(@RequestBody Album album){
-		return albumService.sqlId(album);
+	public List<AlbumDto>sqlId(@RequestBody AlbumDto dto){
+		
+		Album album = albumConverter.dtoToEntity(dto);
+		List<Album> find = albumService.sqlId(album);
+		
+		return albumConverter.entityToDto(find);
 	}
 	
 	@GetMapping("/albums/{id}")
-	public Optional<Album> findAlbum(Album album) {
+	public Optional<Album> findAlbum(AlbumDto dto) {
+		Album album = albumConverter.dtoToEntity(dto);		
 		return albumService.findAlbum(album);
 	}
 	
 	@PostMapping("/albums")
-	public Album saveAlbum(@RequestBody Album album) {
-		return albumService.saveAlbum(album);
+	public AlbumDto saveAlbum(@RequestBody AlbumDto dto) {
+		
+		Album album = albumConverter.dtoToEntity(dto);
+		album = albumService.saveAlbum(album);
+		return albumConverter.entityToDto(album);
 	}
 	
 	@PutMapping("/albums")
-	public Album updateAlbum(@RequestBody Album album) {
-		return albumService.updateAlbum(album);
+	public AlbumDto updateAlbum(@RequestBody AlbumDto dto) {
+		
+		Album album = albumConverter.dtoToEntity(dto);
+		album = albumService.updateAlbum(album);
+		
+		return albumConverter.entityToDto(album);
 	}
 	
 	@DeleteMapping("/albums")
-	public void deleComments(@RequestBody Album album) {
+	public void deleComments(@RequestBody AlbumDto dto) {
+		Album album = albumConverter.dtoToEntity(dto);
 		albumService.deleteAlbum(album);
 	}
 }

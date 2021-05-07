@@ -28,7 +28,7 @@ public class AlbumService {
 		if(albumRepository.existsById(album.getId())) {
 			return albumRepository.findById(album.getId());
 		}
-		return null;
+		return Optional.empty();
 	}
 	
 	public Album saveAlbum(Album album) {
@@ -42,8 +42,9 @@ public class AlbumService {
 		if(albumRepository.existsById(album.getId())){
 			for(Image image: album.getImage()) {
 				image.setAlbum(album);		
-				return albumRepository.save(album);
 			}
+
+			return albumRepository.save(album);
 		}
 		return null;
 		

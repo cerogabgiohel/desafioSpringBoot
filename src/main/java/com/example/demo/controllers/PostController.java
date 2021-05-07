@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.repositories.PostRepository;
 import com.example.demo.services.PostService;
+import com.example.demo.converter.PostConverter;
+import com.example.demo.dto.PostDto;
 import com.example.demo.models.Post;
 
 @RestController
@@ -23,38 +24,52 @@ public class PostController {
 	@Autowired
 	PostService postService;
 	
+	@Autowired
+	PostConverter postConverter;
+	
 	@GetMapping("/posts")
-	public List<Post> listPosts(){
-		return postService.listPosts();
+	public List<PostDto> listPosts(){
+		List<Post> findAll = postService.listPosts();
+		return postConverter.entityToDto(findAll);
 	}
 	
 	@GetMapping("/sql/id")
-	public List<Post>sqlId(@RequestBody Post post){
-		return postService.sqlId(post);
+	public List<PostDto>sqlId(@RequestBody PostDto dto){
+		Post post = postConverter.dtoToEntity(dto);
+		List<Post> find = postService.sqlId(post);
+		return postConverter.entityToDto(find);
 	}
 	
 	@GetMapping("/sql/contains")
-	public List<Post>sqlPost(@RequestBody Post post){
-		return postService.sqlPost(post);
+	public List<PostDto>sqlPost(@RequestBody PostDto dto){
+		Post post = postConverter.dtoToEntity(dto);
+		List<Post> find = postService.sqlPost(post);
+		return postConverter.entityToDto(find);
 	}
 	
 	@GetMapping("/posts/{id}")
-	public Optional<Post> findPost(Post post) {
+	public Optional<Post> findPost(PostDto dto) {
+		Post post = postConverter.dtoToEntity(dto);
 		return postService.findPost(post);
 	}
 	
 	@PostMapping("/posts")
-	public Post savePost(@RequestBody Post post) {
-		return postService.savePost(post);
+	public PostDto savePost(@RequestBody PostDto dto) {
+		Post post = postConverter.dtoToEntity(dto);
+		post = postService.savePost(post);
+		return postConverter.entityToDto(post);
 	}
 	
 	@PutMapping("/posts")
-	public Post updatePost(@RequestBody Post post) {
-		return postService.updatePost(post);
+	public PostDto updatePost(@RequestBody PostDto dto) {
+		Post post = postConverter.dtoToEntity(dto);
+		post = postService.updatePost(post);
+		return postConverter.entityToDto(post);
 	}
 	
 	@DeleteMapping("/posts")
-	public void deletePost(@RequestBody Post post) {
+	public void deletePost(@RequestBody PostDto dto) {
+		Post post = postConverter.dtoToEntity(dto);
 		postService.deletePost(post);		
 	}
 }

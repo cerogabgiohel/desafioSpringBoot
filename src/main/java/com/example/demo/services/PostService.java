@@ -29,10 +29,8 @@ public class PostService {
 	}
 	
 	public Optional<Post> findPost(Post post) {
-		if(postRepository.existsById(post.getId())) {
-			return postRepository.findById(post.getId());
-		}
-		return null;
+			
+		return postRepository.findById(post.getId());	
 	}
 	
 	public Post savePost(Post post) {
@@ -46,8 +44,9 @@ public class PostService {
 		if(postRepository.existsById(post.getId())) {			
 			for(Comment comment:post.getComments()) {
 				comment.setPost(post);
-				return postRepository.save(post);
 			}
+
+			return postRepository.save(post);
 		}
 		return null;
 		

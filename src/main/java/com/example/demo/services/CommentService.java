@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.repositories.CommentRepository;
 import com.example.demo.models.Comment;
-import com.example.demo.models.User;
 
 @Service
 public class CommentService {
@@ -29,10 +28,8 @@ public class CommentService {
 	}	
 	
 	public Optional<Comment> findComment(Comment comment){
-		if(commentRepository.existsById(comment.getIdComment())) {
-			return commentRepository.findById(comment.getIdComment());
-		}
-		return null;
+		
+		return commentRepository.findById(comment.getIdComment());
 	}
 	
 	public void saveComment(Comment comment) {

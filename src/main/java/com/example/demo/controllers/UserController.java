@@ -6,16 +6,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.converter.UserConverter;
+import com.example.demo.dto.UserDto;
 import com.example.demo.models.User;
-import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.UserService;
 
 @RestController
@@ -25,73 +24,119 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	UserConverter userConverter;
+	
 	@GetMapping("/users")
-	public List<User>listAll(){
-		return userService.listUsers();
+	public List<UserDto>listAll(){
+		List<User> findAll = userService.listUsers();
+		return userConverter.entityToDto(findAll);
 	}
 	
 	@GetMapping("/sql/id")
-	public List<User>sqlId(@RequestBody User user){
-		return userService.sqlId(user);
+	public List<UserDto>sqlId(@RequestBody UserDto dto){
+		User user = userConverter.dtoToEntity(dto);	
+		List<User> find = userService.sqlId(user);
+		
+		return userConverter.entityToDto(find);
 	}
 
 	@GetMapping("/sql/name")
-	public List<User>sqlName(@RequestBody User user){
-		return userService.sqlName(user);
+	public List<UserDto>sqlName(@RequestBody UserDto dto){
+		User user = userConverter.dtoToEntity(dto);	
+		List<User> find = userService.sqlName(user);
+		
+		return userConverter.entityToDto(find);
 	}
 	
 	@GetMapping("/sql/contains")
-	public List<User>sqlNameContains(@RequestBody User user){
-		return userService.sqlNameContains(user);
+	public List<UserDto>sqlNameContains(@RequestBody UserDto dto){
+		User user = userConverter.dtoToEntity(dto);	
+		List<User> find = userService.sqlNameContains(user);
+		
+		return userConverter.entityToDto(find);
 	}
 	
 	@GetMapping("/sql/starts")
-	public List<User>sqlStartsBy(@RequestBody User user){
-		return userService.sqlStartsBy(user);
+	public List<UserDto>sqlStartsBy(@RequestBody UserDto dto){
+		User user = userConverter.dtoToEntity(dto);	
+		List<User> find = userService.sqlStartsBy(user);
+		
+		return userConverter.entityToDto(find);
 	}
 	
 	@GetMapping("/sql/ends")
-	public List<User>sqlEndsBy(@RequestBody User user){
-		return userService.sqlEndsBy(user);
+	public List<UserDto>sqlEndsBy(@RequestBody UserDto dto){
+		User user = userConverter.dtoToEntity(dto);	
+		List<User> find = userService.sqlEndsBy(user);
+		
+		return userConverter.entityToDto(find);
 	}	
 	
+	@GetMapping("/sql/join")
+	public List<UserDto>sqlJoin(@RequestBody UserDto dto){
+		User user = userConverter.dtoToEntity(dto);	
+		List<User> find = userService.sqlJoin(user);
+		
+		return userConverter.entityToDto(find);
+	}
+	
 	@GetMapping("/users/{id}")
-	public Optional<User> listUser(User user) {
+	public Optional<User> listUser(UserDto dto) {
+		User user = userConverter.dtoToEntity(dto);
+		
 		return userService.findUser(user);		
 	}
 	
 	@PostMapping("/users")
-	public User saveUser(@RequestBody User user) {
-		return userService.saveUser(user);
+	public UserDto saveUser(@RequestBody UserDto dto) {
+		
+		User user = userConverter.dtoToEntity(dto);		
+		user = userService.saveUser(user);
+		
+		return userConverter.entityToDto(user);
 	}
 	
 	@PutMapping("/users")
-	public User updateUser(@RequestBody User user) {
-		return userService.updateUser(user);
+	public UserDto updateUser(@RequestBody UserDto dto) {
+
+		User user = userConverter.dtoToEntity(dto);
+		user = userService.updateUser(user);
+		return userConverter.entityToDto(user);
 	}
 	
 	@PutMapping("/users/post")
-	public User updateUserPost(@RequestBody User user) {
-		return userService.updateUserPost(user);
+	public UserDto updateUserPost(@RequestBody UserDto dto) {
+
+		User user = userConverter.dtoToEntity(dto);
+		user = userService.updateUserPost(user);
+		return userConverter.entityToDto(user);
 	}
 	
 	@PutMapping("/users/comment")
-	public User updateUserComment(@RequestBody User user) {
-		return userService.updateUserComment(user);
+	public UserDto updateUserComment(@RequestBody UserDto dto) {
+		User user = userConverter.dtoToEntity(dto);
+		user = userService.updateUserComment(user);
+		return userConverter.entityToDto(user);
 	}
 
 	@PutMapping("/users/image")
-	public User updateUserImage(@RequestBody User user) {
-		return userService.updateUserImage(user);
+	public UserDto updateUserImage(@RequestBody UserDto dto) {
+		User user = userConverter.dtoToEntity(dto);
+		user = userService.updateUserImage(user);
+		return userConverter.entityToDto(user);
 	}	
 	
 	@PutMapping("/users/album")
-	public User updateUserAlbum(@RequestBody User user) {
-		return userService.updateUserAlbum(user);
+	public UserDto updateUserAlbum(@RequestBody UserDto dto) {
+		User user = userConverter.dtoToEntity(dto);
+		user = userService.updateUserAlbum(user);
+		return userConverter.entityToDto(user);
 	}	
 	
 	@DeleteMapping("/users")
-	public void deleteUser(@RequestBody User user) {
+	public void deleteUser(@RequestBody UserDto dto) {
+		User user = userConverter.dtoToEntity(dto);
 		userService.delete(user);
 	}
 }

@@ -43,11 +43,13 @@ public class UserService {
 		return userRepository.sqlEndsBy(user.getName());
 	}	
 	
+	public List<User>sqlJoin(User user){
+		return userRepository.sqlJoin(user.getId());
+	}
+	
 	public Optional<User> findUser(User user) {
-		if(userRepository.existsById(user.getId())) {
-			return userRepository.findById(user.getId());
-		}
-		return null;
+		
+		return userRepository.findById(user.getId());		
 	}
 	
 	public User saveUser(User user) {
