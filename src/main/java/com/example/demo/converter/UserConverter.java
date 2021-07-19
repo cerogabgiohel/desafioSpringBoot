@@ -13,14 +13,16 @@ public class UserConverter {
 	
 	public UserDto entityToDto(User user) {
 		
-		UserDto dto = new UserDto();		
+		UserDto dto = new UserDto();	
+		
 		dto.setId(user.getId());		
 		dto.setName(user.getName());
 		dto.setPassword(user.getPassword());
 		dto.setImage(user.getImage());
 		dto.setAlbum(user.getAlbum());
 		dto.setPost(user.getPost());
-		dto.setComment(user.getComment());
+		dto.setComment(user.getComment());		
+		
 		return dto;
 	}
 	
